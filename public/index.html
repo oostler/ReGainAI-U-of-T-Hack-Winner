@@ -6,42 +6,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     /* Add these styles in your existing <style> section */
-  .top-nav {
-    background: var(--card-bg);
-    backdrop-filter: blur(10px);
-    width: 100%;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
+    .top-nav {
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      width: 100%;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
 
-  .user-info {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
-  .user-avatar {
-    width: 32px;
-    height: 32px;
-    background: var(--accent-blue);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-  }
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      background: var(--accent-blue);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
 
-  /* Add this to adjust for the fixed nav bar */
-  .hero {
-    padding-top: 60px;
-  }
+    /* Add this to adjust for the fixed nav bar */
+    .hero {
+      padding-top: 60px;
+    }
+
     :root {
       --bg-primary: #0A0B14;
       --card-bg: rgba(30, 32, 47, 0.6);
@@ -68,6 +69,65 @@
       margin: 0 auto;
       padding: 2rem;
     }
+    /* Progress Bar Styles */
+    .progress-container {
+      width: 80%;
+      max-width: 600px;
+      margin: 2rem auto;
+      text-align: center;
+      animation: fadeSlideUp 1s ease-out;
+    }
+
+    .progress-bar {
+      height: 24px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(10, 132, 255, 0.3);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+      border-radius: 12px;
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .progress-notches {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 2px;
+    }
+
+    .notch {
+      width: 2px;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .level-text {
+      margin-top: 1rem;
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    .progress-complete {
+      animation: progressPulse 0.5s ease-out;
+    }
+
+    @keyframes progressPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+
     /* Hero Section */
     .hero {
       min-height: 100vh;
@@ -320,7 +380,6 @@
   </style>
 </head>
 <body>
-    <!-- Add this right after the opening <body> tag -->
   <nav class="top-nav">
     <div>ReGain AI</div>
     <div class="user-info">
@@ -345,6 +404,20 @@
         <span></span>
         <span></span>
       </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+          <div class="progress-notches">
+            <div class="notch"></div>
+            <div class="notch"></div>
+            <div class="notch"></div>
+            <div class="notch"></div>
+          </div>
+        </div>
+        <div class="level-text">Level 1</div>
+      </div>
     </div>
     <div class="scroll-down"></div>
   </div>
@@ -358,213 +431,248 @@
           <p>Speech therapy sessions are expensive and infrequent, creating gaps in patient progress.</p>
         </div>
         <div class="card">
-          <h3>Engagement Issues</h3>
-          <p>Home exercises often lack real-time feedback, making them less effective.</p>
-        </div>
-        <div class="card">
-          <h3>Recovery Barriers</h3>
-          <p>Patients struggle with frustration, anxiety, and loneliness, slowing recovery.</p>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2 class="section-title">Key Features</h2>
-      <div class="cards-grid">
-        <div class="card">
-          <h3>AI-Powered Speech Therapy</h3>
-          <p>Conversational exercises for verbal fluency, pronunciation, and bilingual support.</p>
-        </div>
-        <div class="card">
-          <h3>Cognitive Training</h3>
-          <p>Memory recall and problem-solving exercises with real-world engagement.</p>
-        </div>
-        <div class="card">
-          <h3>Hands-Free Access</h3>
-          <p>Bone conduction audio enables therapy while moving, perfect for daily practice.</p>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2 class="section-title">Real-World Scenarios</h2>
-      
-      <div class="scenario-container">
-        <h3 class="scenario-title">Speech Therapy for Aphasia</h3>
-        <div class="chat-message ai-message">
-          <p>Let's practice forming sentences. I will start a sentence, and you complete it: 'This morning, I had a cup of...'</p>
-        </div>
-        <div class="chat-message patient-message">
-          <p>"C-coffee."</p>
-        </div>
-        <div class="chat-message ai-message">
-          <p>Good start! Try saying it again: 'I had a cup of coffee.'</p>
-        </div>
-      </div>
-
-      <div class="scenario-container">
-        <h3 class="scenario-title">Bilingual Recovery</h3>
-        <div class="chat-message ai-message">
-          <p>Let's practice switching between English and Spanish. Translate: 'I am feeling happy today.'</p>
-        </div>
-        <div class="chat-message patient-message">
-          <p>"Estoy... estoy sintiendo feliz hoy."</p>
-        </div>
-        <div class="chat-message ai-message">
-          <p>Almost. Try 'Me siento feliz hoy.' Say it with me.</p>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2 class="section-title">Development Timeline</h2>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-content">
-            <h3>Version 1: MVP</h3>
-            <p>Core speech therapy functionality with OpenAI's Realtime Voice API integration.</p>
+            <h3>Engagement Issues</h3>
+            <p>Home exercises often lack real-time feedback, making them less effective.</p>
+          </div>
+          <div class="card">
+            <h3>Recovery Barriers</h3>
+            <p>Patients struggle with frustration, anxiety, and loneliness, slowing recovery.</p>
           </div>
         </div>
-        <div class="timeline-item">
-          <div class="timeline-content">
-            <h3>Version 2: Extended Features</h3>
-            <p>Cognitive exercises and multilingual support with adaptive difficulty scaling.</p>
+      </section>
+  
+      <section>
+        <h2 class="section-title">Key Features</h2>
+        <div class="cards-grid">
+          <div class="card">
+            <h3>AI-Powered Speech Therapy</h3>
+            <p>Conversational exercises for verbal fluency, pronunciation, and bilingual support.</p>
+          </div>
+          <div class="card">
+            <h3>Cognitive Training</h3>
+            <p>Memory recall and problem-solving exercises with real-world engagement.</p>
+          </div>
+          <div class="card">
+            <h3>Hands-Free Access</h3>
+            <p>Bone conduction audio enables therapy while moving, perfect for daily practice.</p>
           </div>
         </div>
-        <div class="timeline-item">
-          <div class="timeline-content">
-            <h3>Version 3: Scheduling</h3>
-            <p>User-friendly scheduling system with reminders and simple session management.</p>
+      </section>
+  
+      <section>
+        <h2 class="section-title">Real-World Scenarios</h2>
+        
+        <div class="scenario-container">
+          <h3 class="scenario-title">Speech Therapy for Aphasia</h3>
+          <div class="chat-message ai-message">
+            <p>Let's practice forming sentences. I will start a sentence, and you complete it: 'This morning, I had a cup of...'</p>
+          </div>
+          <div class="chat-message patient-message">
+            <p>"C-coffee."</p>
+          </div>
+          <div class="chat-message ai-message">
+            <p>Good start! Try saying it again: 'I had a cup of coffee.'</p>
           </div>
         </div>
-        <div class="timeline-item">
-          <div class="timeline-content">
-            <h3>Version 4: Analytics</h3>
-            <p>Progress tracking dashboard for patients and healthcare providers.</p>
+  
+        <div class="scenario-container">
+          <h3 class="scenario-title">Bilingual Recovery</h3>
+          <div class="chat-message ai-message">
+            <p>Let's practice switching between English and Spanish. Translate: 'I am feeling happy today.'</p>
+          </div>
+          <div class="chat-message patient-message">
+            <p>"Estoy... estoy sintiendo feliz hoy."</p>
+          </div>
+          <div class="chat-message ai-message">
+            <p>Almost. Try 'Me siento feliz hoy.' Say it with me.</p>
           </div>
         </div>
-      </div>
-    </section>
-  </div>
-
-  <script>
-    // Intersection Observer for animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
+      </section>
+  
+      <section>
+        <h2 class="section-title">Development Timeline</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h3>Version 1: MVP</h3>
+              <p>Core speech therapy functionality with OpenAI's Realtime Voice API integration.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h3>Version 2: Extended Features</h3>
+              <p>Cognitive exercises and multilingual support with adaptive difficulty scaling.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h3>Version 3: Scheduling</h3>
+              <p>User-friendly scheduling system with reminders and simple session management.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h3>Version 4: Analytics</h3>
+              <p>Progress tracking dashboard for patients and healthcare providers.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  
+    <script>
+      // Intersection Observer for animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, {
+        threshold: 0.1
       });
-    }, {
-      threshold: 0.1
-    });
-
-    document.querySelectorAll('.card, .timeline-item, .scenario-container').forEach((el) => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      observer.observe(el);
-    });
-
-    // WebRTC and API Integration
-    console.log("ReGain AI script is loaded.");
-
-    let pc = null;
-    let localStream = null;
-
-    async function init() {
-      try {
-        const tokenResponse = await fetch("/session");
-        const data = await tokenResponse.json();
-        console.log("Token data:", data);
-
-        const EPHEMERAL_KEY = data.client_secret && data.client_secret.value;
-        if (!EPHEMERAL_KEY) {
-          throw new Error("Ephemeral token not found in the response");
-        }
-
-        pc = new RTCPeerConnection();
-
-        const audioEl = document.createElement("audio");
-        audioEl.autoplay = true;
-        document.body.appendChild(audioEl);
-        pc.ontrack = (event) => {
-          if (event.streams && event.streams[0]) {
-            audioEl.srcObject = event.streams[0];
-          }
-        };
-
-        localStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        localStream.getTracks().forEach(track => {
-          pc.addTrack(track, localStream);
-        });
-
-        const dc = pc.createDataChannel("oai-events");
-        dc.addEventListener("message", (e) => {
-          const realtimeEvent = JSON.parse(e.data);
-          console.log("Received event:", realtimeEvent);
-        });
-
-        const offer = await pc.createOffer();
-        await pc.setLocalDescription(offer);
-
-        const baseUrl = "https://api.openai.com/v1/realtime";
-        const model = "gpt-4o-realtime-preview-2024-12-17";
-
-        const sdpResponse = await fetch(`${baseUrl}?model=${model}`, {
-          method: "POST",
-          body: offer.sdp,
-          headers: {
-            "Authorization": `Bearer ${EPHEMERAL_KEY}`,
-            "Content-Type": "application/sdp"
-          }
-        });
-
-        const answer = {
-          type: "answer",
-          sdp: await sdpResponse.text()
-        };
-        await pc.setRemoteDescription(answer);
-
-        console.log("WebRTC connection established!");
-
-        const responseCreate = {
-          type: "response.create",
-          response: {
-            modalities: ["text"],
-            instructions: "Begin rehabilitation session"
-          }
-        };
-        dc.send(JSON.stringify(responseCreate));
-
-      } catch (error) {
-        console.error("Error during initialization:", error);
-      }
-    }
-
-    function endSession() {
-      if (pc) {
-        pc.close();
-        pc = null;
-      }
-      if (localStream) {
-        localStream.getTracks().forEach(track => track.stop());
-        localStream = null;
-      }
-      console.log("Session ended.");
-    }
-
-    // Connect buttons to the API functions
-    document.getElementById("startButton").addEventListener("click", init);
-    document.getElementById("endButton").addEventListener("click", endSession);
-
-    // Scroll indicator functionality
-    document.querySelector('.scroll-down').addEventListener('click', () => {
-      window.scrollTo({
-        top: window.innerHeight,
-        behavior: 'smooth'
+  
+      document.querySelectorAll('.card, .timeline-item, .scenario-container').forEach((el) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        observer.observe(el);
       });
-    });
-</script>
-</body>
-</html>
+  
+      // Progress tracking variables
+      let currentProgress = 0;
+      let currentLevel = 1;
+      const progressFill = document.querySelector('.progress-fill');
+      const levelText = document.querySelector('.level-text');
+      const progressBar = document.querySelector('.progress-bar');
+      const TOTAL_NOTCHES = 5;
+  
+      // WebRTC and API Integration
+      let pc = null;
+      let localStream = null;
+  
+      async function init() {
+        try {
+          const tokenResponse = await fetch("/session");
+          const data = await tokenResponse.json();
+          console.log("Token data:", data);
+  
+          const EPHEMERAL_KEY = data.client_secret && data.client_secret.value;
+          if (!EPHEMERAL_KEY) {
+            throw new Error("Ephemeral token not found in the response");
+          }
+  
+          pc = new RTCPeerConnection();
+  
+          const audioEl = document.createElement("audio");
+          audioEl.autoplay = true;
+          document.body.appendChild(audioEl);
+          pc.ontrack = (event) => {
+            if (event.streams && event.streams[0]) {
+              audioEl.srcObject = event.streams[0];
+            }
+          };
+  
+          localStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          localStream.getTracks().forEach(track => {
+            pc.addTrack(track, localStream);
+          });
+  
+          const dc = pc.createDataChannel("oai-events");
+          dc.addEventListener("message", (e) => {
+            const realtimeEvent = JSON.parse(e.data);
+            console.log("Received event:", realtimeEvent);
+          });
+  
+          const offer = await pc.createOffer();
+          await pc.setLocalDescription(offer);
+  
+          const baseUrl = "https://api.openai.com/v1/realtime";
+          const model = "gpt-4o-realtime-preview-2024-12-17";
+  
+          const sdpResponse = await fetch(`${baseUrl}?model=${model}`, {
+            method: "POST",
+            body: offer.sdp,
+            headers: {
+              "Authorization": `Bearer ${EPHEMERAL_KEY}`,
+              "Content-Type": "application/sdp"
+            }
+          });
+  
+          const answer = {
+            type: "answer",
+            sdp: await sdpResponse.text()
+          };
+          await pc.setRemoteDescription(answer);
+  
+          console.log("WebRTC connection established!");
+  
+          const responseCreate = {
+            type: "response.create",
+            response: {
+              modalities: ["text"],
+              instructions: "Begin rehabilitation session"
+            }
+          };
+          dc.send(JSON.stringify(responseCreate));
+  
+        } catch (error) {
+          console.error("Error during initialization:", error);
+        }
+      }
+  
+      function endSession() {
+        if (pc) {
+          pc.close();
+          pc = null;
+        }
+        if (localStream) {
+          localStream.getTracks().forEach(track => track.stop());
+          localStream = null;
+        }
+        console.log("Session ended.");
+  
+        // Update progress
+        currentProgress++;
+        const progressPercentage = (currentProgress / TOTAL_NOTCHES) * 100;
+        progressFill.style.width = `${progressPercentage}%`;
+  
+        // Check if progress is complete
+        if (currentProgress >= TOTAL_NOTCHES) {
+          progressBar.classList.add('progress-complete');
+          
+          setTimeout(() => {
+            // Increment level
+            currentLevel++;
+            levelText.textContent = `Level ${currentLevel}`;
+            
+            // Reset progress
+            currentProgress = 0;
+            progressFill.style.transition = 'none';
+            progressFill.style.width = '0%';
+            
+            // Remove completion animation class
+            progressBar.classList.remove('progress-complete');
+            
+            // Re-enable transition
+            setTimeout(() => {
+              progressFill.style.transition = 'width 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+            }, 50);
+          }, 500);
+        }
+      }
+  
+      // Connect buttons to the API functions
+      document.getElementById("startButton").addEventListener("click", init);
+      document.getElementById("endButton").addEventListener("click", endSession);
+  
+      // Scroll indicator functionality
+      document.querySelector('.scroll-down').addEventListener('click', () => {
+        window.scrollTo({
+          top: window.innerHeight,
+          behavior: 'smooth'
+        });
+      });
+    </script>
+  </body>
+  </html>
