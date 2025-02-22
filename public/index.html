@@ -5,6 +5,43 @@
   <title>ReGain AI - Empowering Stroke Recovery</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+    /* Add these styles in your existing <style> section */
+  .top-nav {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    width: 100%;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+    background: var(--accent-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+
+  /* Add this to adjust for the fixed nav bar */
+  .hero {
+    padding-top: 60px;
+  }
     :root {
       --bg-primary: #0A0B14;
       --card-bg: rgba(30, 32, 47, 0.6);
@@ -283,6 +320,14 @@
   </style>
 </head>
 <body>
+    <!-- Add this right after the opening <body> tag -->
+  <nav class="top-nav">
+    <div>ReGain AI</div>
+    <div class="user-info">
+      <div class="user-avatar">J</div>
+      <span>John</span>
+    </div>
+  </nav>
   <div class="hero">
     <div class="hero-content">
       <h1>ReGain AI</h1>
