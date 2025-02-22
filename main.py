@@ -1,11 +1,16 @@
+import os
+from dotenv import load_dotenv
 import openai  # Assumes the beta Python SDK is installed
 import sounddevice as sd
 import numpy as np
 import json
 import time
 
-# Set your API key (for a server-side application, a standard API key can be used)
-openai.api_key = "YOUR_STANDARD_API_KEY"
+# Load environment variables from the .env file
+load_dotenv()
+
+# Set your API key from the environment variable
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Create a realtime session using the beta Python SDK.
 # (This is analogous to creating a WebSocket connection to the Realtime API.)
