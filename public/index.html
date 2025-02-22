@@ -6,23 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     :root {
-      --bg-primary: #000000;
-      --glass-bg: rgba(255, 255, 255, 0.05);
+      --bg-primary: #0A0B14;
+      --card-bg: rgba(30, 32, 47, 0.6);
       --text-primary: #FFFFFF;
       --text-secondary: rgba(255, 255, 255, 0.7);
       --accent-blue: #0A84FF;
       --accent-purple: #BF5AF2;
-      --accent-green: #32D74B;
-      --accent-glow: rgba(10, 132, 255, 0.3);
       --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
     }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       background: var(--bg-primary);
       font-family: var(--font-family);
@@ -30,194 +26,273 @@
       line-height: 1.6;
       overflow-x: hidden;
     }
-
-    /* Gradient background effect */
-    .gradient-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at 50% 50%, 
-        rgba(10, 132, 255, 0.15),
-        rgba(191, 90, 242, 0.1),
-        rgba(0, 0, 0, 1)
-      );
-      z-index: -1;
-    }
-
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 2rem;
     }
-
-    /* Hero Section with Session Controls */
+    /* Hero Section */
     .hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
     }
-
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at top right, 
+        rgba(10, 132, 255, 0.1),
+        rgba(191, 90, 242, 0.05),
+        transparent 70%);
+      z-index: -1;
+    }
     .hero-content {
-      max-width: 800px;
-      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-
     .hero h1 {
       font-size: 4.5rem;
       font-weight: 700;
-      margin-bottom: 1.5rem;
-      background: linear-gradient(135deg, #FFFFFF 0%, rgba(255, 255, 255, 0.7) 100%);
+      background: linear-gradient(135deg, #0A84FF, #BF5AF2);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      margin-bottom: 1.5rem;
+      animation: fadeSlideUp 1s ease-out;
     }
-
     .hero p {
       font-size: 1.5rem;
       color: var(--text-secondary);
-      margin: 0 auto 3rem;
+      margin-bottom: 3rem;
+      animation: fadeSlideUp 1s ease-out 0.2s backwards;
     }
-
     /* Session Controls */
     .session-controls {
       display: flex;
       gap: 1rem;
-      justify-content: center;
       margin-bottom: 2rem;
+      animation: fadeSlideUp 1s ease-out 0.4s backwards;
     }
-
     .session-button {
-      background: var(--glass-bg);
+      background: var(--card-bg);
       border: none;
       padding: 1rem 2rem;
-      border-radius: 16px;
+      border-radius: 12px;
       color: var(--text-primary);
       font-size: 1.1rem;
-      font-weight: 500;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.3s ease;
     }
-
     .session-button#startButton {
       background: var(--accent-blue);
     }
-
     .session-button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 30px var(--accent-glow);
     }
-
-    .session-button:active {
-      transform: translateY(1px);
-    }
-
-    /* Waveform visualization */
+    /* Waveform */
     .waveform {
       display: flex;
-      justify-content: center;
       align-items: center;
       gap: 4px;
       height: 60px;
       margin: 2rem 0;
+      animation: fadeSlideUp 1s ease-out 0.6s backwards;
     }
-
     .waveform span {
       width: 4px;
       background: var(--accent-blue);
       border-radius: 2px;
       opacity: 0.8;
-      transform-origin: 50% 50%;
       animation: pulse 1.5s ease-in-out infinite;
     }
-
     @keyframes pulse {
       0%, 100% { transform: scaleY(0.3); }
       50% { transform: scaleY(1); }
     }
-
-    .waveform span:nth-child(1) { animation-delay: 0.1s; height: 30px; }
-    .waveform span:nth-child(2) { animation-delay: 0.2s; height: 40px; }
-    .waveform span:nth-child(3) { animation-delay: 0.3s; height: 50px; }
-    .waveform span:nth-child(4) { animation-delay: 0.4s; height: 40px; }
-    .waveform span:nth-child(5) { animation-delay: 0.5s; height: 30px; }
-
-    /* Section styling */
-    .section {
-      margin: 8rem 0;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    .waveform span:nth-child(1) { height: 30px; animation-delay: 0.1s; }
+    .waveform span:nth-child(2) { height: 40px; animation-delay: 0.2s; }
+    .waveform span:nth-child(3) { height: 50px; animation-delay: 0.3s; }
+    .waveform span:nth-child(4) { height: 40px; animation-delay: 0.4s; }
+    .waveform span:nth-child(5) { height: 30px; animation-delay: 0.5s; }
+    /* Scroll Indicator */
+    .scroll-down {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
     }
-
-    .section.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .scroll-down::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 20px;
+      border-right: 2px solid var(--accent-blue);
+      border-bottom: 2px solid var(--accent-blue);
+      transform: rotate(45deg);
     }
-
-    .section h2 {
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+      40% { transform: translateY(-20px) translateX(-50%); }
+      60% { transform: translateY(-10px) translateX(-50%); }
+    }
+    /* Challenge Section */
+    .section-title {
       font-size: 2.5rem;
-      margin-bottom: 2rem;
-      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--accent-blue);
+      margin-bottom: 3rem;
+      animation: fadeSlideUp 0.8s ease-out;
     }
-
-    /* Feature cards */
-    .features {
+    .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 2rem;
-      margin: 4rem 0;
+      margin: 2rem 0;
     }
-
-    .feature-card {
-      background: var(--glass-bg);
-      border-radius: 24px;
+    .card {
+      background: var(--card-bg);
+      border-radius: 20px;
       padding: 2rem;
-      backdrop-filter: blur(40px);
-      -webkit-backdrop-filter: blur(40px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: transform 0.3s ease;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      animation: fadeSlideUp 0.8s ease-out;
     }
-
-    .feature-card:hover {
+    .card:hover {
       transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(10, 132, 255, 0.2);
     }
-
-    .feature-card h3 {
+    .card h3 {
+      color: var(--accent-blue);
       font-size: 1.5rem;
       margin-bottom: 1rem;
-      color: var(--accent-blue);
     }
-
+    /* Scenarios Section */
+    .scenario-container {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 2rem 0;
+      animation: fadeSlideUp 0.8s ease-out;
+    }
+    .scenario-title {
+      color: var(--accent-purple);
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .chat-message {
+      margin: 1rem 0;
+      padding: 1rem;
+      border-radius: 12px;
+      max-width: 80%;
+      animation: fadeSlideUp 0.5s ease-out;
+    }
+    .ai-message {
+      background: rgba(10, 132, 255, 0.1);
+      margin-left: 0;
+      border-left: 3px solid var(--accent-blue);
+    }
+    .patient-message {
+      background: rgba(191, 90, 242, 0.1);
+      margin-left: auto;
+      border-right: 3px solid var(--accent-purple);
+    }
+    /* Timeline Section */
+    .timeline {
+      position: relative;
+      padding: 4rem 0;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--accent-blue);
+      transform: translateX(-50%);
+    }
+    .timeline-item {
+      position: relative;
+      margin: 2rem 0;
+      width: 50%;
+      padding-right: 2rem;
+      animation: fadeSlideUp 0.8s ease-out;
+    }
+    .timeline-item:nth-child(even) {
+      margin-left: 50%;
+      padding-right: 0;
+      padding-left: 2rem;
+    }
+    .timeline-content {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 12px;
+      position: relative;
+    }
+    .timeline-content::before {
+      content: '';
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      width: 20px;
+      height: 20px;
+      background: var(--accent-blue);
+      border-radius: 50%;
+      transform: translateY(-50%);
+    }
+    .timeline-item:nth-child(even) .timeline-content::before {
+      right: auto;
+      left: -10px;
+    }
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
     @media (max-width: 768px) {
       .hero h1 { font-size: 3rem; }
-      .hero p { font-size: 1.2rem; }
-      .section h2 { font-size: 2rem; }
-      .session-controls { flex-direction: column; }
-      .session-button { width: 100%; }
+      .timeline::before { left: 20px; }
+      .timeline-item {
+        width: 100%;
+        padding-left: 45px;
+        padding-right: 0;
+      }
+      .timeline-item:nth-child(even) {
+        margin-left: 0;
+        padding-left: 45px;
+      }
+      .timeline-content::before {
+        left: -35px;
+        right: auto;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="gradient-bg"></div>
-  
-  <section class="hero">
+  <div class="hero">
     <div class="hero-content">
       <h1>ReGain AI</h1>
       <p>AI-Powered Speech & Cognitive Therapy Glasses for Stroke Survivors</p>
       
-      <!-- Session Controls -->
       <div class="session-controls">
-        <button class="session-button" id="startButton" aria-label="Start Session">Start Session</button>
-        <button class="session-button" id="endButton" aria-label="End Session">End Session</button>
+        <button class="session-button" id="startButton">Start Session</button>
+        <button class="session-button" id="endButton">End Session</button>
       </div>
       
-      <!-- Waveform -->
       <div class="waveform">
         <span></span>
         <span></span>
@@ -226,79 +301,145 @@
         <span></span>
       </div>
     </div>
-  </section>
+    <div class="scroll-down"></div>
+  </div>
 
   <div class="container">
-    <section class="section">
-      <h2>The Challenge</h2>
-      <div class="features">
-        <div class="feature-card">
+    <section>
+      <h2 class="section-title">The Challenge</h2>
+      <div class="cards-grid">
+        <div class="card">
           <h3>Limited Access</h3>
           <p>Speech therapy sessions are expensive and infrequent, creating gaps in patient progress.</p>
         </div>
-        <div class="feature-card">
+        <div class="card">
           <h3>Engagement Issues</h3>
           <p>Home exercises often lack real-time feedback, making them less effective.</p>
         </div>
-        <div class="feature-card">
+        <div class="card">
           <h3>Recovery Barriers</h3>
           <p>Patients struggle with frustration, anxiety, and loneliness, slowing recovery.</p>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <h2>Key Features</h2>
-      <div class="features">
-        <div class="feature-card">
+    <section>
+      <h2 class="section-title">Key Features</h2>
+      <div class="cards-grid">
+        <div class="card">
           <h3>AI-Powered Speech Therapy</h3>
           <p>Conversational exercises for verbal fluency, pronunciation, and bilingual support.</p>
         </div>
-        <div class="feature-card">
+        <div class="card">
           <h3>Cognitive Training</h3>
           <p>Memory recall and problem-solving exercises with real-world engagement.</p>
         </div>
-        <div class="feature-card">
+        <div class="card">
           <h3>Hands-Free Access</h3>
           <p>Bone conduction audio enables therapy while moving, perfect for daily practice.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Real-World Scenarios</h2>
+      
+      <div class="scenario-container">
+        <h3 class="scenario-title">Speech Therapy for Aphasia</h3>
+        <div class="chat-message ai-message">
+          <p>Let's practice forming sentences. I will start a sentence, and you complete it: 'This morning, I had a cup of...'</p>
+        </div>
+        <div class="chat-message patient-message">
+          <p>"C-coffee."</p>
+        </div>
+        <div class="chat-message ai-message">
+          <p>Good start! Try saying it again: 'I had a cup of coffee.'</p>
+        </div>
+      </div>
+
+      <div class="scenario-container">
+        <h3 class="scenario-title">Bilingual Recovery</h3>
+        <div class="chat-message ai-message">
+          <p>Let's practice switching between English and Spanish. Translate: 'I am feeling happy today.'</p>
+        </div>
+        <div class="chat-message patient-message">
+          <p>"Estoy... estoy sintiendo feliz hoy."</p>
+        </div>
+        <div class="chat-message ai-message">
+          <p>Almost. Try 'Me siento feliz hoy.' Say it with me.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Development Timeline</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>Version 1: MVP</h3>
+            <p>Core speech therapy functionality with OpenAI's Realtime Voice API integration.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>Version 2: Extended Features</h3>
+            <p>Cognitive exercises and multilingual support with adaptive difficulty scaling.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>Version 3: Scheduling</h3>
+            <p>User-friendly scheduling system with reminders and simple session management.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>Version 4: Analytics</h3>
+            <p>Progress tracking dashboard for patients and healthcare providers.</p>
+          </div>
         </div>
       </div>
     </section>
   </div>
 
   <script>
-    // Intersection Observer for scroll animations
+    // Intersection Observer for animations
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
         }
       });
     }, {
       threshold: 0.1
     });
 
-    document.querySelectorAll('.section').forEach((section) => {
-      observer.observe(section);
+    document.querySelectorAll('.card, .timeline-item, .scenario-container').forEach((el) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      observer.observe(el);
     });
 
-    // WebRTC and OpenAI API Integration
+    // WebRTC and API Integration
+    console.log("ReGain AI script is loaded.");
+
     let pc = null;
     let localStream = null;
-    
+
     async function init() {
       try {
         const tokenResponse = await fetch("/session");
         const data = await tokenResponse.json();
         console.log("Token data:", data);
-    
+
         const EPHEMERAL_KEY = data.client_secret && data.client_secret.value;
         if (!EPHEMERAL_KEY) {
           throw new Error("Ephemeral token not found in the response");
         }
-    
+
         pc = new RTCPeerConnection();
-    
+
         const audioEl = document.createElement("audio");
         audioEl.autoplay = true;
         document.body.appendChild(audioEl);
@@ -307,24 +448,24 @@
             audioEl.srcObject = event.streams[0];
           }
         };
-    
+
         localStream = await navigator.mediaDevices.getUserMedia({ audio: true });
         localStream.getTracks().forEach(track => {
           pc.addTrack(track, localStream);
         });
-    
+
         const dc = pc.createDataChannel("oai-events");
         dc.addEventListener("message", (e) => {
           const realtimeEvent = JSON.parse(e.data);
           console.log("Received event:", realtimeEvent);
         });
-    
+
         const offer = await pc.createOffer();
         await pc.setLocalDescription(offer);
-    
+
         const baseUrl = "https://api.openai.com/v1/realtime";
         const model = "gpt-4o-realtime-preview-2024-12-17";
-    
+
         const sdpResponse = await fetch(`${baseUrl}?model=${model}`, {
           method: "POST",
           body: offer.sdp,
@@ -333,15 +474,15 @@
             "Content-Type": "application/sdp"
           }
         });
-    
+
         const answer = {
           type: "answer",
           sdp: await sdpResponse.text()
         };
         await pc.setRemoteDescription(answer);
-    
+
         console.log("WebRTC connection established!");
-    
+
         const responseCreate = {
           type: "response.create",
           response: {
@@ -350,12 +491,12 @@
           }
         };
         dc.send(JSON.stringify(responseCreate));
-    
+
       } catch (error) {
         console.error("Error during initialization:", error);
       }
     }
-    
+
     function endSession() {
       if (pc) {
         pc.close();
@@ -367,9 +508,18 @@
       }
       console.log("Session ended.");
     }
-    
+
+    // Connect buttons to the API functions
     document.getElementById("startButton").addEventListener("click", init);
     document.getElementById("endButton").addEventListener("click", endSession);
-  </script>
+
+    // Scroll indicator functionality
+    document.querySelector('.scroll-down').addEventListener('click', () => {
+      window.scrollTo({
+        top: window.innerHeight,
+        behavior: 'smooth'
+      });
+    });
+</script>
 </body>
 </html>
