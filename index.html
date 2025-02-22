@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Mock Interview</title>
+  <style>
+    /* 1) Root variables (Bootstrap-like) */
+    :root {
+      --blue: #007bff;
+      --indigo: #6610f2;
+      --purple: #6f42c1;
+      --pink: #e83e8c;
+      --red: #dc3545;
+      --orange: #fd7e14;
+      --yellow: #ffc107;
+      --green: #28a745;
+      --teal: #20c997;
+      --cyan: #17a2b8;
+      --white: #fff;
+      --gray: #6c757d;
+      --gray-dark: #343a40;
+      --primary: #007bff;
+      --secondary: #6c757d;
+      --success: #28a745;
+      --info: #17a2b8;
+      --warning: #ffc107;
+      --danger: #dc3545;
+      --light: #f8f9fa;
+      --dark: #343a40;
+      --breakpoint-xs: 0;
+      --breakpoint-sm: 576px;
+      --breakpoint-md: 768px;
+      --breakpoint-lg: 992px;
+      --breakpoint-xl: 1200px;
+      --font-family-sans-serif: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    /* 2) Box-sizing reset */
+    *, ::before, ::after {
+      box-sizing: border-box;
+    }
+
+    /* 3) Base HTML defaults */
+    html {
+      font-family: sans-serif;
+      line-height: 1.15;
+      -webkit-text-size-adjust: 100%;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* 4) BODY styles with DM Sans and a light background */
+    body {
+      margin: 0;
+      font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      font-size: 1rem;
+      color: #3d3d3d;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #f4f6f9;
+    }
+
+    /* 5) Container styles: full width up to 1080px (or 900px on narrower screens) */
+    .container-900 {
+      width: 100%;
+      max-width: 1080px;
+      padding: 0 1em;
+      margin: 0 auto;
+    }
+    @media (max-width: 992px) {
+      .container-900 {
+        max-width: 900px;
+      }
+    }
+
+    /* 6) Additional text styling */
+    .gray-four {
+      color: #747474 !important;
+    }
+
+    /* 7) Header / Navigation styles */
+    header {
+      background-color: #2C449C;
+      padding: 1rem 0;
+      color: #fff;
+    }
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0 auto;
+      max-width: 1080px;
+      padding: 0 1rem;
+    }
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    .logo span {
+      color: #E62931;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #fff;
+      margin-left: 1.5rem;
+      font-size: 14px;
+    }
+
+    /* Dropdown menu aesthetics (non-functional) */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--white);
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    .dropdown-content a {
+      color: #2C449C;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* 8) Banner styles */
+    .banner {
+      background-color: #fff9e6;
+      border: 1px solid #f5e9c6;
+      padding: 1rem;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    /* 9) Headings for main content */
+    h1, h2 {
+      margin: 1rem 0 0.5rem;
+      color: #333;
+    }
+
+    /* 10) Interview content styling */
+    .interview-container {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 2rem;
+      margin: 2rem 0;
+      text-align: center;
+    }
+    .interview-container h1 {
+      margin-bottom: 0.5em;
+    }
+    .interview-container h2 {
+      margin-bottom: 1.5em;
+      font-weight: normal;
+    }
+
+    /* 11) Button styling */
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 4px;
+      background-color: var(--primary);
+      color: var(--white);
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    /* 12) Paragraph styling */
+    p {
+      color: var(--gray);
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <header>
+    <div class="nav-container">
+      <div class="logo">Mock<span>AI</span></div>
+      <div class="nav-links">
+        <a href="#">Dashboard</a>
+        <a href="#">Interview Tips</a>
+        <a href="#">Settings</a>
+        <div class="dropdown">
+          <a href="#" class="dropbtn">More</a>
+          <div class="dropdown-content">
+            <a href="#">Profile</a>
+            <a href="#">History</a>
+            <a href="#">Help</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <div class="banner">
+    Ready for your interview? Check out our <a href="#" style="color: #2C449C; text-decoration: underline;">Interview Guide</a>.
+  </div>
+
+  <!-- Main Interview Content -->
+  <div class="container-900">
+    <div class="interview-container">
+      <h1>AI Mock Interview</h1>
+      <h2>Practice your case interview in real-time with AI</h2>
+      <button id="startButton">Start Mock Interview</button>
+      <button id="endButton">End</button>
+      <p>Try it now, you will thank us later.</p>
+    </div>
+  </div>
+
+  <!-- Realtime Voice API Demo Logic -->
+  <script>
+    console.log("index.html script is loaded.");
+
+    // Global variables for peer connection and local stream
+    let pc = null;
+    let localStream = null;
+
+    async function init() {
+      try {
+        // Request an ephemeral key from your backend server
+        const tokenResponse = await fetch("/session");
+        const data = await tokenResponse.json();
+        console.log("Token data:", data);
+
+        // Verify the ephemeral token structure
+        const EPHEMERAL_KEY = data.client_secret && data.client_secret.value;
+        if (!EPHEMERAL_KEY) {
+          throw new Error("Ephemeral token not found in the response");
+        }
+
+        // Create a new RTCPeerConnection
+        pc = new RTCPeerConnection();
+
+        // Create and configure an audio element to play remote audio
+        const audioEl = document.createElement("audio");
+        audioEl.autoplay = true;
+        document.body.appendChild(audioEl);
+        pc.ontrack = (event) => {
+          if (event.streams && event.streams[0]) {
+            audioEl.srcObject = event.streams[0];
+          }
+        };
+
+        // Capture local audio from the user's microphone
+        localStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        localStream.getTracks().forEach(track => {
+          pc.addTrack(track, localStream);
+        });
+
+        // Create a data channel for sending and receiving events
+        const dc = pc.createDataChannel("oai-events");
+        dc.addEventListener("message", (e) => {
+          const realtimeEvent = JSON.parse(e.data);
+          console.log("Received event:", realtimeEvent);
+        });
+
+        // Create the SDP offer and set it as the local description
+        const offer = await pc.createOffer();
+        await pc.setLocalDescription(offer);
+
+        // Set connection details for the OpenAI Realtime API
+        const baseUrl = "https://api.openai.com/v1/realtime";
+        const model = "gpt-4o-realtime-preview-2024-12-17";
+
+        // Send the SDP offer to the Realtime API to get an SDP answer
+        const sdpResponse = await fetch(`${baseUrl}?model=${model}`, {
+          method: "POST",
+          body: offer.sdp,
+          headers: {
+            "Authorization": `Bearer ${EPHEMERAL_KEY}`,
+            "Content-Type": "application/sdp"
+          }
+        });
+
+        // Set the received SDP answer as the remote description
+        const answer = {
+          type: "answer",
+          sdp: await sdpResponse.text()
+        };
+        await pc.setRemoteDescription(answer);
+
+        console.log("WebRTC connection established!");
+
+        // OPTIONAL: Example of sending an event to the model
+        const responseCreate = {
+          type: "response.create",
+          response: {
+            modalities: ["text"],
+            instructions: "Write a haiku about code"
+          }
+        };
+        dc.send(JSON.stringify(responseCreate));
+
+      } catch (error) {
+        console.error("Error during initialization:", error);
+      }
+    }
+
+    // Function to end the session: closes the peer connection and stops the audio stream
+    function endSession() {
+      if (pc) {
+        pc.close();
+        pc = null;
+      }
+      if (localStream) {
+        localStream.getTracks().forEach(track => track.stop());
+        localStream = null;
+      }
+      console.log("Session ended.");
+    }
+
+    // Attach event listeners to the buttons
+    document.getElementById("startButton").addEventListener("click", init);
+    document.getElementById("endButton").addEventListener("click", endSession);
+  </script>
+</body>
+</html>

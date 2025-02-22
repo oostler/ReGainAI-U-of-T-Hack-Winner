@@ -1,0 +1,27 @@
+{
+    "name": "mockai",
+    "version": "1.0.0",
+    "main": "server.js",
+    "type": "module",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node server.js"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/oostler/mockAI.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/oostler/mockAI/issues"
+    },
+    "homepage": "https://github.com/oostler/mockAI#readme",
+    "description": "",
+    "dependencies": {
+      "express": "^4.21.2",
+      "node-fetch": "^3.3.2"
+    }
+  }
+  
