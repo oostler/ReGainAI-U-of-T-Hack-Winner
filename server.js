@@ -65,7 +65,22 @@ app.post("/send-email", async (req, res) => {
   });
 
   const subject = `New Level Achieved - ${patientName}`;
-  const text = `Patient ${patientName} has achieved a new level, completing 5 practice sessions.`;
+  const totalSessions = level * 5;
+  
+  const text = `
+   Dear Dr.,
+   
+   We are pleased to inform you that patient ${patientName} has successfully progressed to Level ${level} in their rehabilitation program. This achievement reflects the completion of ${totalSessions} total practice sessions, demonstrating their ongoing commitment to recovery.
+
+   Patient Progress Summary:
+   - Patient Name: ${patientName}
+   - Current Level: ${level}
+   - Total Sessions Completed: ${totalSessions}
+
+   Please let us know if you require further details regarding their progress, session performance, or any specific metrics.
+
+   Best regards,  
+   ReGain AI Support Team`;
 
   // Debug: Print statement before sending email
   console.log(`Attempting to send email for ${patientName} at level ${level}`);
