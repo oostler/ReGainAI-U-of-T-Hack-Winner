@@ -32,8 +32,9 @@ Stroke survivors often face challenges with speech, mobility, and overall commun
 - **Enhances Clinical Oversight:**  
   Automated email notifications keep healthcare providers informed about patient progress, enabling timely adjustments to therapy plans.
 
+##
 
-  ReGain AI Support is dedicated to improving the quality of life for stroke survivors by providing accessible, adaptive, and effective rehabilitation. Join us in our mission to empower recovery and promote reintegration into society.
+ReGain AI Support is dedicated to improving the quality of life for stroke survivors by providing accessible, adaptive, and effective rehabilitation. Join us in our mission to empower recovery and promote reintegration into society.
 
-  Authors:
-  Owen Ostler, Ehud Zaltzman, and Alp Unsal
+Authors:
+**Owen Ostler, Ehud Zaltzman, and Alp Unsal**
