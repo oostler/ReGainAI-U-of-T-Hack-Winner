@@ -32,7 +32,7 @@ ReGain AI is an AI-powered rehabilitation platform that provides a hands-free, v
 
 ## Project Description
 
-ReGain AI Support is structured as a full-stack web service built on modern JavaScript infrastructure. It consists of two primary backend endpoints, a lightweight frontend user interface, and an integrated email notification pipeline for clinical reporting.
+ReGain AI Support is structured as a full-stack web service built on JavaScript infrastructure. It consists of two primary backend endpoints, a lightweight frontend user interface, and an integrated email notification pipeline for clinical reporting.
 
 ### Session Minting Endpoint (`/session`)
 
@@ -64,37 +64,34 @@ This ensures that clinicians remain informed about the patient’s progress in r
 The architecture is designed for real-time, low-latency interaction between the AI model, the voice interface, and clinical backend services.
 
 **Frontend Layer:**
-- Built using standard web technologies (HTML, CSS, JavaScript) with WebRTC and MediaStream APIs.
-- Captures user audio through the browser microphone and streams it directly to the backend.
-- Displays real-time transcriptions and AI responses, while maintaining minimal visual distraction for accessibility.
+- Built using standard web technologies (HTML, CSS, JavaScript) with the browser **MediaStream API** for real-time microphone capture.
+- Captures user audio through `navigator.mediaDevices.getUserMedia()` and streams it directly to the backend via a single WebSocket connection.
+- Displays AI responses and live transcriptions in real time through a lightweight, accessible interface.
 
 **Backend Layer (Node.js + Express):**
 - Manages session lifecycle and OpenAI Realtime API communication.
-- Implements a dual WebSocket pipeline:  
-  - One connection for receiving live audio input.  
-  - One connection for streaming text and synthesized voice responses back to the client.
-- Maintains ephemeral session tokens for privacy and HIPAA-friendly operation.
+- Maintains a single WebSocket connection for bidirectional audio and text streaming between the client and the OpenAI Realtime API.
+- Generates ephemeral session tokens for temporary, secure API access.
 
 **Realtime AI Processing:**
-- Uses OpenAI’s Realtime API for low-latency natural language understanding and speech synthesis.
-- Dynamically adapts tone, pacing, and exercise difficulty based on patient responses.
-- Session context is stored temporarily in memory to personalize feedback within a session without persisting sensitive data.
+- Uses OpenAI’s **Realtime API** for low-latency natural language understanding and speech synthesis.
+- Adapts conversationally to patient responses within each session using contextual memory.
+- Session context is stored temporarily in memory to personalize interactions without persisting user data.
 
 **Email and Reporting Layer:**
-- Utilizes Nodemailer with secure OAuth2 authentication through Gmail SMTP.
-- Each completed session generates a structured report object that is serialized into an email body for clinician review.
-- Future versions are designed to integrate with EHR (Electronic Health Record) systems through FHIR-compliant APIs.
+- Utilizes **Nodemailer** with Gmail SMTP for automated clinician summaries.
+- Each completed session generates a structured report object (patient name, date, duration, exercises completed) that is serialized into an email body for clinician review.
+- Future versions are intended to integrate with EHR (Electronic Health Record) systems through FHIR-compliant APIs.
 
 ### Data Flow
 
-1. **Voice Input:** User speaks into the voice-enabled glasses or microphone.  
-2. **Streaming Layer:** Audio is captured and streamed to the backend through a WebSocket.  
-3. **Realtime AI Processing:** Backend forwards audio to the OpenAI Realtime API, which interprets intent, generates a response, and synthesizes output speech.  
-4. **Therapy Logic Layer:** The system evaluates progress markers (accuracy, latency, speech clarity) and adjusts exercises accordingly.  
-5. **Response Delivery:** The synthesized voice and textual feedback are streamed back to the user in real time.  
-6. **Session Summary:** Once complete, the session data is compiled and emailed to the clinician.  
+1. **Voice Input:** User speaks into a microphone connected to the browser.  
+2. **Streaming Layer:** Audio is captured via the MediaStream API and streamed to the backend through a WebSocket.  
+3. **Realtime AI Processing:** The backend forwards audio to the OpenAI Realtime API, which interprets intent, generates a response, and synthesizes output speech.  
+4. **Response Delivery:** The synthesized voice and textual feedback are streamed back to the user in real time.  
+5. **Session Summary:** After completion, session data is compiled and emailed to the clinician.  
 
-This closed-loop interaction enables continuous engagement without manual intervention, providing both patients and clinicians with a seamless, data-informed experience.
+This closed-loop interaction enables hands-free, adaptive therapy sessions that keep clinicians informed without manual intervention.
 
 ## Technology Stack
 
@@ -102,19 +99,19 @@ This closed-loop interaction enables continuous engagement without manual interv
 |------------|----------------|----------|
 | Backend Framework | Node.js + Express | Web server and routing |
 | AI Model | OpenAI Realtime API | Speech and language processing |
-| Voice Interface | WebRTC + MediaStream | Real-time audio capture and streaming |
+| Voice Interface | MediaStream API + WebSocket | Real-time audio capture and streaming |
 | Email Service | Nodemailer + Gmail SMTP | Automated clinician updates |
 | Environment Management | dotenv | Secure environment variable handling |
 | Frontend | HTML, CSS, JavaScript | Lightweight user interface |
-| Hosting | Render / Vercel / AWS EC2 | Deployment environment |
 
 ## Use Case
 
-ReGain AI Support addresses the core rehabilitation needs of stroke survivors, including speech, mobility, and communication. Its adaptive AI enables patients to engage in therapy at their own pace while maintaining consistent clinical oversight. The system provides:
+ReGain AI addresses the core rehabilitation needs of stroke survivors, including speech, mobility, and communication. Its AI-powered, voice-interactive sessions allow patients to engage in therapy independently while maintaining clinical oversight. The system provides:
 
 - **Accessible Rehabilitation:** Hands-free therapy for users with limited mobility.  
-- **Continuous Adaptation:** Exercises evolve based on real-time performance metrics.  
+- **Conversational Adaptation:** Exercises adjust contextually based on real-time interaction.  
 - **Clinician Connectivity:** Automatic email summaries ensure consistent communication between patient and provider.
+
 
 ## Authors
 
