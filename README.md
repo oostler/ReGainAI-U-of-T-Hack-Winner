@@ -1,4 +1,4 @@
-# ReGain AI Support
+# ReGainAI - A Post Stroke Rehabilitation Program
 
 Winner of NeuroHack 2025 – University of Toronto  
 [Watch the Demo Video](https://youtu.be/your-demo-link-here)
