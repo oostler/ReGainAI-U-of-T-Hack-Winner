@@ -4,8 +4,27 @@ Winner of NeuroHack 2025 – University of Toronto
 [Watch the Demo Video](https://youtu.be/your-demo-link-here)
 
 <p align="center">
-  <img src="./public/screenshot.png" alt="ReGain AI User Interface" width="750"/>
+  <table width="100%">
+    <tr>
+      <td align="center" width="50%">
+        <img src="./public/image%204.png" alt="ReGain AI – Home Interface" width="95%"/><br/>
+      </td>
+      <td align="center" width="50%">
+        <img src="./public/image%203.png" alt="ReGain AI – Active Session" width="95%"/><br/>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" width="50%">
+        <img src="./public/image%202.png" alt="ReGain AI – Feedback Summary" width="95%"/><br/>
+      </td>
+      <td align="center" width="50%">
+        <img src="./public/image%201.png" alt="ReGain AI – Clinician Dashboard" width="95%"/><br/>
+      </td>
+    </tr>
+  </table>
 </p>
+
+
 
 ## Overview
 
